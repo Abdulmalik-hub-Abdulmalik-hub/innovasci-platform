@@ -3,7 +3,7 @@
 
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm"
 
-const supabaseUrl = "YOUR_SUPABASE_URL"
-const supabaseKey = "YOUR_ANON_PUBLIC_KEY"
+const supabaseUrl = "https://jwibdneazdkupqyuahjb.supabase.co"
+const supabaseKey = "sb_publishable_sOpFjqp2aJaiHdWvn30nQw_tUVI4Fpu"
 
 export const supabase = createClient(supabaseUrl, supabaseKey)
