@@ -1,0 +1,119 @@
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:#f5f7fb;
+color:#333;
+}
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+background:#0b1f3a;
+color:white;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo img{
+width:40px;
+}
+
+nav a{
+margin:0 10px;
+text-decoration:none;
+color:white;
+}
+
+.login-btn{
+background:#4CAF50;
+padding:8px 15px;
+border-radius:5px;
+}
+
+.hero{
+text-align:center;
+padding:100px 20px;
+background:#0b1f3a;
+color:white;
+}
+
+.hero-buttons{
+margin-top:20px;
+}
+
+.btn-primary{
+background:#4CAF50;
+padding:12px 20px;
+text-decoration:none;
+color:white;
+border-radius:5px;
+}
+
+.btn-secondary{
+background:white;
+padding:12px 20px;
+text-decoration:none;
+color:#0b1f3a;
+border-radius:5px;
+margin-left:10px;
+}
+
+.services{
+padding:60px 40px;
+text-align:center;
+}
+
+.service-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.service-card{
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 5px 10px rgba(0,0,0,0.1);
+}
+
+.service-card img{
+width:60px;
+}
+
+.courses{
+padding:60px 40px;
+text-align:center;
+}
+
+.course-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.course-card{
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 5px 10px rgba(0,0,0,0.1);
+}
+
+footer{
+background:#0b1f3a;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+.footer-links a{
+color:white;
+margin:0 10px;
+text-decoration:none;
+}
