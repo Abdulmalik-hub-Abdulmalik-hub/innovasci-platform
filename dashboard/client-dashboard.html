@@ -54,3 +54,29 @@
 <script type="module" src="../assets/js/notifications.js"></script>
 </body>
 </html>
+/* ==== Notifications CSS ==== */
+.notif-wrapper { position: relative; display: inline-block; }
+.notif-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+}
+.notif-list {
+  display: none; /* toggle visible */
+  position: absolute;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 300px;
+  overflow-y: auto;
+  width: 300px;
+  z-index: 999;
+}
+.notif-item { padding: 10px; border-bottom: 1px solid #eee; }
+.notif-item.success { background-color: #e6f7ff; }
+.notif-item.info { background-color: #fffbe6; }
