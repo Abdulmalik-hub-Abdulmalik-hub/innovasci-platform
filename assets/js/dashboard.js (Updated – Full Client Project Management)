@@ -1,0 +1,114 @@
+import { supabase } from '../config/supabase.js';
+
+const logoutBtn = document.getElementById('logoutBtn');
+logoutBtn.addEventListener('click', async () => {
+  await supabase.auth.signOut();
+  window.location.href = '../portal/login.html';
+});
+
+// Ensure authentication
+supabase.auth.getSession().then(({ data }) => {
+  if (!data.session) window.location.href = '../portal/login.html';
+});
+
+// -------------------- Projects --------------------
+const projectForm = document.getElementById('projectForm');
+const projectMsg = document.getElementById('projectMsg');
+const projectsList = document.getElementById('projectsList');
+
+if(projectForm){
+  projectForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const title = document.getElementById('projectTitle').value;
+    const description = document.getElementById('projectDescription').value;
+    const files = document.getElementById('projectFiles').files;
+
+    const { data: userData } = await supabase.auth.getUser();
+    const client_id = userData.user.id;
+
+    // Insert project
+    const { data: projectData, error } = await supabase
+      .from('projects')
+      .insert([{ client_id, title, description }])
+      .select()
+      .single();
+
+    if(error) { projectMsg.textContent = error.message; return; }
+
+    // Upload project files
+    if(files.length>0){
+      for(let file of files){
+        const { error: uploadError } = await supabase.storage
+          .from('project-files')
+          .upload(`${projectData.id}/${file.name}`, file);
+        if(uploadError) console.log('Upload error:', uploadError.message);
+      }
+    }
+
+    projectMsg.textContent = 'Project submitted successfully!';
+    projectForm.reset();
+    loadProjects();
+  });
+}
+
+// Load Projects
+async function loadProjects(){
+  const { data: userData } = await supabase.auth.getUser();
+  const { data: projects, error } = await supabase
+    .from('projects')
+    .select('*')
+    .eq('client_id', userData.user.id)
+    .order('created_at', { ascending:false });
+
+  if(projectsList){
+    projectsList.innerHTML = '';
+    projects.forEach(p=>{
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${p.title}</strong> - Status: ${p.status}`;
+      projectsList.appendChild(li);
+    });
+  }
+}
+
+// Initial load
+loadProjects();
+
+// -------------------- Messages --------------------
+const messagesList = document.getElementById('messagesList');
+async function loadMessages(){
+  if(!messagesList) return;
+  const { data: userData } = await supabase.auth.getUser();
+  const { data: messages, error } = await supabase
+    .from('messages')
+    .select('*')
+    .or(`sender_id.eq.${userData.user.id},receiver_id.eq.${userData.user.id}`)
+    .order('created_at', { ascending:true });
+
+  messagesList.innerHTML = '';
+  messages.forEach(m=>{
+    const li = document.createElement('li');
+    li.textContent = `${m.sender_name}: ${m.content} (${new Date(m.created_at).toLocaleString()})`;
+    messagesList.appendChild(li);
+  });
+}
+loadMessages();
+
+// -------------------- Invoices --------------------
+const invoicesList = document.getElementById('invoicesList');
+async function loadInvoices(){
+  if(!invoicesList) return;
+  const { data: userData } = await supabase.auth.getUser();
+  const { data: invoices, error } = await supabase
+    .from('invoices')
+    .select('*')
+    .eq('client_id', userData.user.id)
+    .order('created_at', { ascending:false });
+
+  invoicesList.innerHTML = '';
+  invoices.forEach(inv=>{
+    const li = document.createElement('li');
+    li.innerHTML = `Invoice #: ${inv.id} | Project: ${inv.project_title} | Amount: ₦${inv.amount} | Status: ${inv.status}`;
+    invoicesList.appendChild(li);
+  });
+}
+loadInvoices();
