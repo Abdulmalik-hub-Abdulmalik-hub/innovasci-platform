@@ -1,77 +1,98 @@
 import { supabase } from "../../config/supabase.js"
 
-const form = document.getElementById("certificateForm")
+const form=document.getElementById("certificateForm")
 
 if(form){
 
-form.addEventListener("submit", async (e)=>{
+form.addEventListener("submit",async(e)=>{
 
 e.preventDefault()
 
-const studentName =
-document.getElementById("studentName").value
+const name=document.getElementById("studentName").value
+const course=document.getElementById("courseTitle").value
+const date=document.getElementById("completionDate").value
 
-const courseTitle =
-document.getElementById("courseTitle").value
+// CERTIFICATE ID
+const certId="ISC-"+Math.floor(Math.random()*1000000)
 
-const completionDate =
-document.getElementById("completionDate").value
+document.getElementById("certStudent").innerText=name
+document.getElementById("certCourse").innerText=course
+document.getElementById("certDate").innerText=date
+document.getElementById("certId").innerText=certId
 
-const certificateId =
-"ISC-" + Math.floor(Math.random()*1000000)
+// HASH SECURITY
+const hash=CryptoJS.SHA256(name+course+date+certId).toString()
 
-const {data,error} =
+// VERIFY URL
+const verifyUrl=window.location.origin+"/certificate/verify.html?id="+certId
+
+// QR CODE
+QRCode.toCanvas(
+document.getElementById("qrCode"),
+verifyUrl
+)
+
+// GENERATE PDF
+
+const { jsPDF } = window.jspdf
+
+const pdf=new jsPDF("landscape")
+
+await pdf.html(
+document.getElementById("certificateTemplate"),
+{
+
+callback:async function(pdf){
+
+const blob=pdf.output("blob")
+
+const fileName=certId+".pdf"
+
+// UPLOAD PDF
+
+const {data,error}=await supabase.storage
+.from("certificates")
+.upload(fileName,blob)
+
+if(error){
+
+alert("Upload error")
+
+return
+
+}
+
+// PUBLIC URL
+
+const url=supabase.storage
+.from("certificates")
+.getPublicUrl(fileName).data.publicUrl
+
+// SAVE RECORD
+
 await supabase.from("certificates").insert([{
 
-student_name:studentName,
-course_title:courseTitle,
-completion_date:completionDate,
-certificate_id:certificateId
+student_name:name,
+course_title:course,
+completion_date:date,
+certificate_id:certId,
+certificate_hash:hash,
+certificate_url:url
 
 }])
 
-if(error){
+// DOWNLOAD
 
-document.getElementById("result").innerText =
-"Error generating certificate"
+window.open(url)
 
-}else{
-
-document.getElementById("result").innerText =
-"Certificate Generated ID: " + certificateId
+alert("Certificate Generated Successfully")
 
 }
+
+}
+
+)
 
 })
-
-}
-
-window.verifyCertificate = async function(){
-
-const id =
-document.getElementById("certificateId").value
-
-const {data,error} =
-await supabase.from("certificates")
-.select("*")
-.eq("certificate_id",id)
-.single()
-
-if(error){
-
-document.getElementById("certificateResult").innerText =
-"Certificate not found"
-
-}else{
-
-document.getElementById("certificateResult").innerHTML =
-`
-<h3>Certificate Valid</h3>
-<p>Name: ${data.student_name}</p>
-<p>Course: ${data.course_title}</p>
-<p>Date: ${data.completion_date}</p>
-`
-
-}
 
 }
