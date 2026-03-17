@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Blog - InnovaSci AI Labs</title>
+<link rel="stylesheet" href="../assets/css/admin.css">
+<script type="module" src="../assets/js/blog.js" defer></script>
+</head>
+<body>
+<header>
+  <h1>Blog Manager</h1>
+  <button id="logoutBtn">Logout</button>
+</header>
+
+<main>
+  <section id="addBlogSection">
+    <h2>Add New Article</h2>
+    <form id="blogForm">
+      <input type="text" id="blogTitle" placeholder="Title" required>
+      <input type="text" id="blogCategory" placeholder="Category" required>
+      <input type="file" id="blogImage" accept="image/*">
+      <textarea id="blogContent" placeholder="Content" required></textarea>
+      <input type="text" id="blogTags" placeholder="Tags (comma-separated)">
+      <button type="submit">Publish</button>
+    </form>
+    <div id="blogMsg"></div>
+  </section>
+
+  <section id="existingBlogs">
+    <h2>Existing Articles</h2>
+    <ul id="blogList"></ul>
+  </section>
+</main>
+</body>
+</html>
