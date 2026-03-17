@@ -6,6 +6,9 @@
 
 <title>InnovaSci AI Labs</title>
 
+<!-- IMPORTANT FOR GITHUB PAGES -->
+<base href="/InnovaSci-platform-/">
+
 <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
@@ -13,11 +16,10 @@
 <body>
 
 <!-- NAVBAR -->
-
 <header class="navbar">
 
 <div class="logo">
-<img src="assets/images/logo.png" alt="InnovaSci Logo">
+<img src="assets/images/logo.png" alt="Logo">
 <span>InnovaSci AI Labs</span>
 </div>
 
@@ -25,48 +27,38 @@
 
 <a href="index.html">Home</a>
 <a href="academy/courses.html">Academy</a>
-<a href="services.html">Services</a>
-<a href="portfolio.html">Portfolio</a>
+<a href="client/submit-project.html">Projects</a>
 <a href="blog/blog.html">Blog</a>
+
+<!-- TEMP PAGES (safe fallback) -->
 <a href="contact.html">Contact</a>
 
 <a class="login-btn" href="portal/login.html">Login</a>
 
 </nav>
 
-<div class="menu-toggle" id="menuToggle">
-☰
-</div>
+<div class="menu-toggle" id="menuToggle">☰</div>
 
 </header>
 
-
-<!-- HERO SECTION -->
-
+<!-- HERO -->
 <section class="hero">
 
 <h1>Center for Computational Science & AI Research</h1>
 
 <p>
-Welcome to InnovaSci AI Labs — where Artificial Intelligence,
-Computational Chemistry, Data Science, and Scientific Innovation meet.
+Building the future with Artificial Intelligence, Computational Chemistry,
+and Data Science innovation.
 </p>
 
 <div class="hero-buttons">
-
 <a href="academy/courses.html" class="btn-primary">Explore Courses</a>
-
-<a href="client/submit-project.html" class="btn-secondary">
-Submit Project
-</a>
-
+<a href="client/submit-project.html" class="btn-secondary">Submit Project</a>
 </div>
 
 </section>
 
-
 <!-- SERVICES -->
-
 <section class="services">
 
 <h2>Our Services</h2>
@@ -76,101 +68,57 @@ Submit Project
 <div class="service-card">
 <img src="assets/images/python.png">
 <h3>AI Development</h3>
-<p>
-Machine learning, AI tools, and automation solutions for research and business.
-</p>
+<p>AI tools, automation, and machine learning solutions.</p>
 </div>
 
 <div class="service-card">
 <img src="assets/images/dna.png">
 <h3>Computational Biology</h3>
-<p>
-AI-powered bioinformatics and molecular simulations.
-</p>
+<p>Bioinformatics and molecular simulations powered by AI.</p>
 </div>
 
 <div class="service-card">
 <img src="assets/images/chemistry.png">
 <h3>Computational Chemistry</h3>
-<p>
-Quantum chemistry, molecular modeling, and materials simulation.
-</p>
+<p>Quantum chemistry and advanced material simulations.</p>
 </div>
 
 </div>
 
 </section>
 
-
 <!-- COURSES PREVIEW -->
+<section class="courses-preview">
 
-<section class="courses">
-
-<h2>Academy Courses</h2>
+<h2>Popular Courses</h2>
 
 <div class="course-grid">
 
 <div class="course-card">
-
-<h3>Python for Scientists</h3>
-
-<p>
-Learn Python programming for research and scientific computing.
-</p>
-
-<a href="academy/course-detail.html">View Course</a>
-
+<h3>AI for Beginners</h3>
+<p>Learn fundamentals of Artificial Intelligence.</p>
+<a href="academy/courses.html">View Course</a>
 </div>
 
-
 <div class="course-card">
-
 <h3>Computational Chemistry</h3>
-
-<p>
-Master molecular modeling and quantum chemistry simulations.
-</p>
-
-<a href="academy/course-detail.html">View Course</a>
-
-</div>
-
-
-<div class="course-card">
-
-<h3>AI for Research</h3>
-
-<p>
-Use artificial intelligence tools for modern scientific research.
-</p>
-
-<a href="academy/course-detail.html">View Course</a>
-
+<p>Simulation and modeling techniques.</p>
+<a href="academy/courses.html">View Course</a>
 </div>
 
 </div>
 
 </section>
 
-
 <!-- FOOTER -->
-
 <footer>
 
 <p>© 2026 InnovaSci AI Labs</p>
 
-<div class="footer-links">
-
-<a href="portal/signup.html">Create Account</a>
-<a href="portal/login.html">Student Login</a>
-<a href="contact.html">Contact</a>
-
-</div>
-
 </footer>
 
-
-<script type="module" src="assets/js/app.js"></script>
+<!-- JS -->
+<script src="assets/js/script.js"></script>
 
 </body>
 </html>
