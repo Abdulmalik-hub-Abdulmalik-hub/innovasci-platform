@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Dashboard</title>
+
+<link rel="stylesheet" href="../assets/css/dashboard.css">
+
+</head>
+<body>
+
+<h1>Client Dashboard</h1>
+
+<nav>
+  <a href="client-dashboard.html">Overview</a> |
+  <a href="projects.html">My Projects</a> |
+  <a href="invoices.html">Invoices</a> |
+  <a href="messages.html">Messages</a> |
+  <a href="../portal/logout.html">Logout</a>
+</nav>
+
+<section id="dashboardOverview">
+<h2>Welcome, <span id="clientName"></span></h2>
+<div id="notifications"></div>
+</section>
+
+<section>
+<h3>Submit New Project</h3>
+<form id="projectForm">
+<input type="text" id="projectTitle" placeholder="Project Title" required>
+<textarea id="projectDesc" placeholder="Project Description" required></textarea>
+<input type="file" id="projectFiles" multiple>
+<button type="submit">Submit Project</button>
+</form>
+</section>
+
+<section>
+<h3>Project Progress</h3>
+<div id="projectsList"></div>
+</section>
+
+<script type="module" src="../assets/js/dashboard.js"></script>
+</body>
+</html>
