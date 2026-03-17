@@ -1,22 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Verify Certificate</title>
+
+<script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.js"></script>
+
+<style>
+
+body{
+
+font-family:Arial;
+
+text-align:center;
+
+padding:60px;
+
+}
+
+.valid{
+
+color:green;
+
+font-size:24px;
+
+}
+
+</style>
+
 </head>
 
 <body>
 
 <h1>Certificate Verification</h1>
 
-<input type="text" id="certificateId" placeholder="Enter Certificate ID">
+<input id="certInput" placeholder="Enter Certificate ID">
 
-<button onclick="verifyCertificate()">Verify</button>
+<button onclick="verify()">Verify</button>
 
-<div id="certificateResult"></div>
+<div id="result"></div>
 
-<script type="module" src="../assets/js/certificate.js"></script>
+<script type="module">
+
+import { supabase } from "../config/supabase.js"
+
+const params=new URLSearchParams(window.location.search)
+
+const id=params.get("id")
+
+if(id){
+
+document.getElementById("certInput").value=id
+
+verify()
+
+}
+
+window.verify=async function(){
+
+const certId=document.getElementById("certInput").value
+
+const {data,error}=await supabase
+.from("certificates")
+.select("*")
+.eq("certificate_id",certId)
+.single()
+
+if(error){
+
+document.getElementById("result").innerHTML=
+"<p>Certificate not found</p>"
+
+return
+
+}
+
+document.getElementById("result").innerHTML=
+
+`
+<h2 class="valid">Certificate Valid</h2>
+
+<p><b>Name:</b> ${data.student_name}</p>
+
+<p><b>Course:</b> ${data.course_title}</p>
+
+<p><b>Date:</b> ${data.completion_date}</p>
+
+<a href="${data.certificate_url}" target="_blank">
+Download Certificate
+</a>
+`
+
+}
+
+</script>
 
 </body>
+
 </html>
