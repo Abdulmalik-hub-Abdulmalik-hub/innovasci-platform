@@ -1,0 +1,60 @@
+/* Floating Chat Widget */
+.chat-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  max-height: 400px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9999;
+  font-family: Arial, sans-serif;
+}
+
+.chat-header {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+.chat-input {
+  display: flex;
+  border-top: 1px solid #ccc;
+}
+
+.chat-input input {
+  flex: 1;
+  border: none;
+  padding: 8px;
+}
+
+.chat-input button {
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.chat-bubble {
+  margin-bottom: 8px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  max-width: 80%;
+}
+
+.chat-bubble.user { background-color: #4caf50; color: #fff; align-self: flex-end; }
+.chat-bubble.bot { background-color: #e6e6e6; color: #000; align-self: flex-start; }
